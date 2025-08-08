@@ -1,0 +1,176 @@
+{
+  "collections": [
+    {
+      "name": "classes",
+      "type": "base",
+      "schema": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "periods",
+          "type": "json",
+          "options": {
+            "maxSize": 200000
+          }
+        }
+      ],
+      "listRule": "@request.auth.id != '' && @collection.classes.user.id = @request.auth.id",
+      "viewRule": "@request.auth.id != '' && @collection.classes.user.id = @request.auth.id",
+      "createRule": "@request.auth.id != ''",
+      "updateRule": "@request.auth.id != '' && @collection.classes.user.id = @request.auth.id",
+      "deleteRule": "@request.auth.id != '' && @collection.classes.user.id = @request.auth.id"
+    },
+    {
+      "name": "lessons",
+      "type": "base",
+      "schema": [
+        {
+          "name": "class",
+          "type": "relation",
+          "required": true,
+          "options": {
+            "collectionId": "classes",
+            "cascadeDelete": true,
+            "maxSelect": 1
+          }
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "text"
+        },
+        {
+          "name": "objectives",
+          "type": "text"
+        },
+        {
+          "name": "activities",
+          "type": "text"
+        },
+        {
+          "name": "resources",
+          "type": "text"
+        },
+        {
+          "name": "assignment",
+          "type": "text"
+        },
+        {
+          "name": "homework",
+          "type": "text"
+        },
+        {
+          "name": "assessments",
+          "type": "text"
+        },
+        {
+          "name": "files",
+          "type": "file",
+          "options": {
+            "maxSelect": 6,
+            "maxSize": 5242880
+          }
+        }
+      ],
+      "listRule": "@request.auth.id != '' && class.user.id = @request.auth.id",
+      "viewRule": "@request.auth.id != '' && class.user.id = @request.auth.id",
+      "createRule": "@request.auth.id != '' && class.user.id = @request.auth.id",
+      "updateRule": "@request.auth.id != '' && class.user.id = @request.auth.id",
+      "deleteRule": "@request.auth.id != '' && class.user.id = @request.auth.id",
+      "indexes": [
+        "create unique index if not exists lessons_uniq on lessons (class, date, period)"
+      ]
+    },
+    {
+      "name": "notes",
+      "type": "base",
+      "schema": [
+        {
+          "name": "user",
+          "type": "relation",
+          "required": true,
+          "options": {
+            "collectionId": "users",
+            "maxSelect": 1
+          }
+        },
+        {
+          "name": "content",
+          "type": "text"
+        }
+      ],
+      "listRule": "@request.auth.id != '' && user.id = @request.auth.id",
+      "viewRule": "@request.auth.id != '' && user.id = @request.auth.id",
+      "createRule": "@request.auth.id != '' && user.id = @request.auth.id",
+      "updateRule": "@request.auth.id != '' && user.id = @request.auth.id",
+      "deleteRule": "@request.auth.id != '' && user.id = @request.auth.id",
+      "indexes": [
+        "create unique index if not exists notes_user_uniq on notes (user)"
+      ]
+    },
+    {
+      "name": "terms",
+      "type": "base",
+      "schema": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "start",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "end",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "listRule": "@request.auth.id != '' && @collection.terms.user.id = @request.auth.id",
+      "viewRule": "@request.auth.id != '' && @collection.terms.user.id = @request.auth.id",
+      "createRule": "@request.auth.id != ''",
+      "updateRule": "@request.auth.id != '' && @collection.terms.user.id = @request.auth.id",
+      "deleteRule": "@request.auth.id != '' && @collection.terms.user.id = @request.auth.id"
+    },
+    {
+      "name": "templates",
+      "type": "base",
+      "schema": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "class",
+          "type": "relation",
+          "options": {
+            "collectionId": "classes",
+            "maxSelect": 1
+          }
+        },
+        {
+          "name": "body",
+          "type": "json",
+          "options": {
+            "maxSize": 500000
+          }
+        }
+      ],
+      "listRule": "@request.auth.id != '' && (@collection.templates.user.id = @request.auth.id || class.user.id = @request.auth.id)",
+      "viewRule": "@request.auth.id != '' && (@collection.templates.user.id = @request.auth.id || class.user.id = @request.auth.id)",
+      "createRule": "@request.auth.id != ''",
+      "updateRule": "@request.auth.id != '' && (@collection.templates.user.id = @request.auth.id || class.user.id = @request.auth.id)",
+      "deleteRule": "@request.auth.id != '' && (@collection.templates.user.id = @request.auth.id || class.user.id = @request.auth.id)"
+    }
+  ]
+}

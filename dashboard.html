@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr. Carpenter’s Lesson Plans — Dashboard</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo" class="brand-logo sm" />
+      <h1>Mr. Carpenter’s Lesson Plans</h1>
+    </div>
+    <div class="topbar-actions">
+      <button id="theme-toggle" class="btn ghost" title="Toggle theme">🌓</button>
+      <button id="print-view" class="btn ghost" title="Print/PDF">🖨️</button>
+      <span id="user-email" class="muted"></span>
+      <button id="signout" class="btn ghost">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar card">
+      <div class="section-header">
+        <h2>Classes</h2>
+        <button id="add-class" class="btn sm">+ Add</button>
+      </div>
+      <ul id="class-list" class="list"></ul>
+
+      <hr />
+      <h3>Terms</h3>
+      <div class="row"><select id="term-select"></select><button id="add-term" class="btn ghost sm">+ Term</button></div>
+
+      <hr />
+      <h3>Templates</h3>
+      <div class="row">
+        <select id="template-select"></select>
+        <button id="save-template" class="btn ghost sm">Save from current</button>
+        <button id="apply-template" class="btn ghost sm">Apply…</button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <section class="card calendar-wrap">
+        <div class="calendar-header">
+          <button id="prev-month" class="btn ghost">◀</button>
+          <h2 id="calendar-title"></h2>
+          <button id="next-month" class="btn ghost">▶</button>
+        </div>
+        <div id="calendar-toolbar" class="row space">
+          <div class="row">
+            <label>Term
+              <select id="term-select-top"></select>
+            </label>
+          </div>
+          <div class="row">
+            <button id="export-csv" class="btn ghost">Export CSV</button>
+          </div>
+        </div>
+        <div id="calendar" class="calendar"></div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h3>Lesson Plan for <span id="selected-date-label"></span></h3>
+          <div class="row">
+            <label>Class <select id="lesson-class"></select></label>
+            <label>Period <select id="period-select"></select></label>
+            <button id="edit-periods" class="btn ghost sm">Edit Periods</button>
+          </div>
+
+          <label>Objectives<textarea id="lesson-objectives" rows="3"></textarea></label>
+          <label>Activities<textarea id="lesson-activities" rows="4"></textarea></label>
+          <label>Resources<textarea id="lesson-resources" rows="2" placeholder="Links auto‑linked"></textarea></label>
+          <label>Assignment<textarea id="lesson-assignment" rows="2"></textarea></label>
+          <label>Homework<textarea id="lesson-homework" rows="2"></textarea></label>
+          <label>Assessments<textarea id="lesson-assessments" rows="2"></textarea></label>
+
+          <label>Attachments<input type="file" id="lesson-files" multiple /></label>
+          <div id="file-list" class="muted"></div>
+
+          <div class="row end">
+            <button id="save-lesson" class="btn">Save Lesson</button>
+            <button id="delete-lesson" class="btn danger ghost">Delete</button>
+          </div>
+          <div class="row">
+            <button id="copy-to-dates" class="btn ghost">Copy to dates…</button>
+            <button id="shift-range" class="btn ghost">Shift range…</button>
+          </div>
+          <div id="lesson-status" class="muted"></div>
+        </div>
+
+        <div class="card">
+          <h3>General Notes</h3>
+          <textarea id="general-notes" rows="10" placeholder="Anything not tied to a specific date or class..."></textarea>
+          <div class="row end"><button id="save-notes" class="btn">Save Notes</button></div>
+          <div id="notes-status" class="muted"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <template id="class-item">
+    <li class="list-item">
+      <span class="name"></span>
+      <div class="actions">
+        <button class="btn ghost sm rename">Rename</button>
+        <button class="btn danger ghost sm remove">Remove</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js"></script>
+  <script type="module" src="utils.js"></script>
+  <script type="module" src="db.js"></script>
+  <script type="module" src="calendar.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

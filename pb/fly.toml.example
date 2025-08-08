@@ -1,0 +1,17 @@
+app = "mrcarp-plans-pb"
+primary_region = "ord"
+[build]
+  dockerfile = "Dockerfile"
+[[mounts]]
+  source = "pbdata"
+  destination = "/app/pb_data"
+[[services]]
+  internal_port = 8090
+  processes = ["app"]
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]

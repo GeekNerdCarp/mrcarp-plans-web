@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr. Carpenter’s Lesson Plans – Sign In</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="auth-body">
+  <main class="auth-container card">
+    <img src="assets/logo.png" alt="Mr. Carpenter’s mascot" class="brand-logo" />
+    <h1 class="brand-title">Mr. Carpenter’s Lesson Plans</h1>
+
+    <div class="tabs">
+      <button class="tab active" data-view="signin">Sign In</button>
+      <button class="tab" data-view="signup">Create Account</button>
+    </div>
+
+    <form id="signin" class="auth-form visible">
+      <label>Email<input type="email" id="si-email" required /></label>
+      <label>Password<input type="password" id="si-password" required /></label>
+      <button type="submit" class="btn">Sign In</button>
+      <p class="muted">By continuing you agree to our terms.</p>
+    </form>
+
+    <form id="signup" class="auth-form">
+      <label>Email<input type="email" id="su-email" required /></label>
+      <label>Password<input type="password" id="su-password" minlength="8" required /></label>
+      <button type="submit" class="btn">Create Account</button>
+      <p class="muted">You’ll be able to sign in immediately (email verification optional in PB settings).</p>
+    </form>
+
+    <div id="auth-error" class="error"></div>
+  </main>
+
+  <script src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js"></script>
+  <script type="module" src="utils.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
