@@ -3,7 +3,8 @@ import { pb, currentUser, isAuthed, listClasses, addClass, renameClass, removeCl
 import { buildCalendar } from './calendar.js';
 
 // ====== ENV ======
-window.ENV_PB_URL = window.ENV_PB_URL || 'http://127.0.0.1:8090';
+// app.js
+window.ENV_PB_URL = "https://mrcarp-plans-pb.fly.dev"; // replace after Fly deploy;
 // ==================
 
 const isAuthPage = location.pathname.endsWith('index.html') || location.pathname.endsWith('/') || !location.pathname.includes('.html');
